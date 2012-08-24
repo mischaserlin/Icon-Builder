@@ -44,13 +44,33 @@ $(function(){
 		$('#image_layers_list').html(imageLayerHTML);
 	};
 
+	var getLayerObject = function(e){
+
+	};
+
+	var reorderImageLayersArray = function(e){
+		var reorderedImageLayers = [];
+
+		$("#image_layers_list li").each(function(index, element){
+			layerObject_id = $(element).attr("data-id");
+			console.log(layerObject_id);
+			for(var i = 0; i < imageLayers.length; i++){
+				if( layerObject_id == imageLayers[i].id ){
+					reorderedImageLayers.push(imageLayers[i]);
+				}
+			}
+		});
+		console.log(reorderedImageLayers);
+
+		imageLayers = reorderedImageLayers;
+
+		outputImageLayers();
+		showPreview();
+	};
+
 	var showPreview = function(e){
 		$(".previewHolder").html("");
-		var imagePreviewHTML = "";
-		for(var i = 0; i < imageLayers.length; i++){
-			var html = templatePreview(imageLayers[i]);
-			imagePreviewHTML += html;
-		}
+		var imagePreviewHTML = templatePreview({layers: imageLayers});
 		$(".previewHolder").html(imagePreviewHTML);
 	};
 
@@ -77,16 +97,16 @@ $(function(){
 
 	var removeLayer = function(e){
 		var selectedImageLayer_id = $(this).attr("data-id");
-		var layerImage_id;
+		var layerImage_position;
 		for(var i = 0; i < imageLayers.length; i++){
 			if( selectedImageLayer_id == imageLayers[i].id ){
-				layerImage_id = i;
+				layerImage_position = i;
 				break;
 			}
 		}
-		console.log(layerImage_id);
+		console.log(layerImage_position);
 
-		imageLayers.splice(layerImage_id, 1);
+		imageLayers.splice(layerImage_position, 1);
 		console.log(imageLayers);
 
 		outputImageLayers();
@@ -123,5 +143,34 @@ $(function(){
 	$('#image_layers_list').on('click', '.deletelayer', removeLayer);
 
 	$('#image_layers_list').on('keydown', '.imageopacity-field', changeOpacity);
+
+
+
+	$('#image_layers_list').dragsort({ 
+		dragSelector: ".movelayer"
+		, dragEnd: function(){
+			reorderImageLayersArray();
+		} 
+	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 });

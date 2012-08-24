@@ -33,7 +33,6 @@
 					<h4>Preview</h4>
 					<div class="row">
 						<div class="previewHolder">
-							<img class="rounded_edges" src="images/effects/rounded_edges.png"></img>
 						</div>
 					</div>	
 				</div>
@@ -45,7 +44,7 @@
 			</div>
 		</div>
 	<script id="image_layer_template" type="text/x-handlebars-template">
-  		<li class="image_layer">
+  		<li class="image_layer" data-id="{{id}}">
   			<div>
   				<img class="imagelayer-image" src="{{url}}"></img>
   				<span class="imagelayer-name">{{name}}</span>
@@ -59,7 +58,10 @@
 		</li>
 	</script>
 	<script id="icon_preview_template" type="text/x-handlebars-template">
-		<img src="{{url}}" data-id="{{id}}" style="opacity: {{opacity}}"></img>
+		{{#each layers}}
+			<img src="{{this.url}}" data-id="{{this.id}}" style="opacity: {{this.opacity}}"></img>
+		{{/each}}
+		<img class="rounded_edges" src="images/effects/rounded_edges.png"></img>
 	</script>
 	</body>
 </html>
