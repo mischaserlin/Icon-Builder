@@ -37,32 +37,37 @@ $(function(){
 	var outputImageLayers = function(e){
 		var imageLayerHTML = "";
 		for(var i = 0; i < imageLayers.length; i++){
+			imageLayers[i].position = i;
 			var html = templateLayers(imageLayers[i]);
 			imageLayerHTML += html;
 		}
 		console.log(imageLayerHTML);
+		console.log("check position", imageLayers);
 		$('#image_layers_list').html(imageLayerHTML);
 	};
 
-	var getLayerObject = function(e){
+	var reorderImageLayersArray = function(){
+		console.log('BILBO', this);
+		var removedLayerObject;
 
-	};
-
-	var reorderImageLayersArray = function(e){
-		var reorderedImageLayers = [];
+		for(var i = 0; i < imageLayers.length; i++){
+			console.log('WILL IT BLEND?', $(this).attr("data-layer-position"), imageLayers[i].position);
+			if($(this).attr("data-layer-position") == imageLayers[i].position){
+				console.log("ITEMSSDFS", imageLayers[i]);
+				removedLayerObject = imageLayers[i];
+				imageLayers.splice(i,1);
+				break;
+			}
+		}
+		console.log("CHECKITEM", removedLayerObject);
+		console.log(imageLayers);
 
 		$("#image_layers_list li").each(function(index, element){
-			layerObject_id = $(element).attr("data-id");
-			console.log(layerObject_id);
-			for(var i = 0; i < imageLayers.length; i++){
-				if( layerObject_id == imageLayers[i].id ){
-					reorderedImageLayers.push(imageLayers[i]);
-				}
+			if( $(element).attr("data-layer-position") == removedLayerObject.position){
+				imageLayers.splice(index, 0, removedLayerObject);
 			}
 		});
-		console.log(reorderedImageLayers);
 
-		imageLayers = reorderedImageLayers;
 
 		outputImageLayers();
 		showPreview();
@@ -88,7 +93,12 @@ $(function(){
 		$('#image_category li').removeClass('highlight');
 		$(this).addClass("highlight");
 
-		imageLayers.push(imageSelected);
+		imageLayers.push({
+			id: imageSelected.id
+			, opacity: imageSelected.opacity
+			, name: imageSelected.name
+			, url: imageSelected.url
+		});
 		console.log(imageLayers);
 
 		outputImageLayers();
@@ -144,33 +154,16 @@ $(function(){
 
 	$('#image_layers_list').on('keydown', '.imageopacity-field', changeOpacity);
 
-
-
 	$('#image_layers_list').dragsort({ 
 		dragSelector: ".movelayer"
-		, dragEnd: function(){
-			reorderImageLayersArray();
-		} 
+		, dragEnd: reorderImageLayersArray
 	});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	//$('#iconBuilder').on('click', 'button.approve', doSomeMagicalShit);
+	/* The functions (doSomeMagicalShit) for this selector for the approve button 
+	   should probably return you the imageLayers array because that contains the 
+	   image layers and each images properties.
+	*/
 
 
 });

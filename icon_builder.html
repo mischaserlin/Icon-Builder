@@ -11,16 +11,19 @@
 			<script src="icon_builder.js" type="text/javascript"></script>
 	</head>
 	<body>
-		<div class="container">
+		<div id="iconBuilder" class="container">
 			<div class="row">
 				<div class="span12">
 					<h1>Build your hella cool icon!</h1>
+					<p>1. Select as many images form the right as you want.</p> 
+					<p>2. Change some image properties and rearrange the layers on the right.</p> 
+					<p>3. Preview and approve your icon in the middle.</p>
 				</div>
 			</div>	
 			<div class="row">
 				<div class="span4">
 					<h4>Choose your images</h4>
-					<div class="dropdown">
+					<div class="dropdown center">
 	  					<a class="dropdown-toggle btn" id="dLabel" role="button" data-toggle="dropdown" data-target="#">Categories
 	  						<b class="caret"></b>
 	  					</a>
@@ -29,22 +32,20 @@
 					</div>
 					<ul id="image_category" class=""></ul>
 				</div>
-				<div class="span4">
+				<div class="span4" style="text-align:center">
 					<h4>Preview</h4>
-					<div class="row">
-						<div class="previewHolder">
-						</div>
-					</div>	
+					<div class="previewHolder"></div>	
+					<button class="btn btn-primary approve" type="button">Approve</button>	
 				</div>
 				<div class="span4">
-					<h4>Arrange Layers</h4>
+					<h4 style="margin-left:25px">Arrange Layers</h4>
 					<ol id="image_layers_list">
 					</ol>
 				</div>
 			</div>
 		</div>
 	<script id="image_layer_template" type="text/x-handlebars-template">
-  		<li class="image_layer" data-id="{{id}}">
+  		<li class="image_layer" data-id="{{id}}" data-layer-position="{{position}}">
   			<div>
   				<img class="imagelayer-image" src="{{url}}"></img>
   				<span class="imagelayer-name">{{name}}</span>
