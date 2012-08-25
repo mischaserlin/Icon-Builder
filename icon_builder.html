@@ -30,7 +30,7 @@
 	  					<ul class="dropdown-menu" role="menu">
 	  					</ul>
 					</div>
-					<ul id="image_category" class=""></ul>
+					<ul id="imageCategory" class=""></ul>
 				</div>
 				<div class="span4" style="text-align:center">
 					<h4>Preview</h4>
@@ -39,16 +39,16 @@
 				</div>
 				<div class="span4">
 					<h4 style="margin-left:25px">Arrange Layers</h4>
-					<ol id="image_layers_list">
+					<ol id="imageLayersList">
 					</ol>
 				</div>
 			</div>
 		</div>
-	<script id="image_layer_template" type="text/x-handlebars-template">
-  		<li class="image_layer" data-id="{{id}}" data-layer-position="{{position}}">
+	<script id="imageLayerTemplate" type="text/x-handlebars-template">
+  		<li class="imageLayer" data-id="{{id}}" data-layer-position="{{position}}">
   			<div>
-  				<img class="imagelayer-image" src="{{url}}"></img>
-  				<span class="imagelayer-name">{{name}}</span>
+  				<img class="imageLayerImage" src="{{url}}"></img>
+  				<span class="imageLayerName">{{name}}</span>
   				<button class="btn btn-mini movelayer" type="button"><i class="icon-move"></i></button>
 				<button class="btn btn-danger btn-mini deletelayer" type="button" data-id="{{id}}" data-name="{{name}}" data-url="{{url}}"><i class="icon-trash"></i></button>
 			</div>
@@ -58,7 +58,7 @@
 			</div>
 		</li>
 	</script>
-	<script id="icon_preview_template" type="text/x-handlebars-template">
+	<script id="iconPreviewTemplate" type="text/x-handlebars-template">
 		{{#each layers}}
 			<img src="{{this.url}}" data-id="{{this.id}}" style="opacity: {{this.opacity}}"></img>
 		{{/each}}

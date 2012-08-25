@@ -8,10 +8,10 @@ $(function(){
 		, effects: [{id: 20, name: "Highlight", opacity: 1, url: "images/effects/lighting.png"}, {id: 21, name: "Round Edges", opacity: 1, url: "images/effects/rounded_edges.png"}]
 	};
 
-	var sourceLayers = $("#image_layer_template").html();
+	var sourceLayers = $("#imageLayerTemplate").html();
 	var templateLayers = Handlebars.compile(sourceLayers);
 
-	var sourcePreview = $("#icon_preview_template").html();
+	var sourcePreview = $("#iconPreviewTemplate").html();
 	var templatePreview = Handlebars.compile(sourcePreview);
 
 	$('.dropdown').on('click', 'a', function(){
@@ -31,7 +31,7 @@ $(function(){
 			categoryDisplayHTML += '<li class="' + categoryPicked + '"><img data-id="' + imageCategories[categoryPicked][i].id + '" data-category="' + selectedCategory + '" src="' + imageCategories[categoryPicked][i].url + '"></img></li> ';
 		}
 		console.log(categoryDisplayHTML);
-		$('#image_category').html(categoryDisplayHTML);
+		$('#imageCategory').html(categoryDisplayHTML);
 	});
 
 	var outputImageLayers = function(e){
@@ -43,7 +43,7 @@ $(function(){
 		}
 		console.log(imageLayerHTML);
 		console.log("check position", imageLayers);
-		$('#image_layers_list').html(imageLayerHTML);
+		$('#imageLayersList').html(imageLayerHTML);
 	};
 
 	var reorderImageLayersArray = function(){
@@ -62,7 +62,7 @@ $(function(){
 		console.log("CHECKITEM", removedLayerObject);
 		console.log(imageLayers);
 
-		$("#image_layers_list li").each(function(index, element){
+		$("#imageLayersList li").each(function(index, element){
 			if( $(element).attr("data-layer-position") == removedLayerObject.position){
 				imageLayers.splice(index, 0, removedLayerObject);
 			}
@@ -90,7 +90,7 @@ $(function(){
 		}
 		// imageSelected = {id: imageSelected_id, name: imageSelected_name, opacity: 1, url: imageSelected_url}
 
-		$('#image_category li').removeClass('highlight');
+		$('#imageCategory li').removeClass('highlight');
 		$(this).addClass("highlight");
 
 		imageLayers.push({
@@ -106,17 +106,17 @@ $(function(){
 	};
 
 	var removeLayer = function(e){
-		var selectedImageLayer_id = $(this).attr("data-id");
-		var layerImage_position;
+		var selectedImageLayerId = $(this).attr("data-id");
+		var layerImagePosition;
 		for(var i = 0; i < imageLayers.length; i++){
-			if( selectedImageLayer_id == imageLayers[i].id ){
-				layerImage_position = i;
+			if( selectedImageLayerId == imageLayers[i].id ){
+				layerImagePosition = i;
 				break;
 			}
 		}
-		console.log(layerImage_position);
+		console.log(layerImagePosition);
 
-		imageLayers.splice(layerImage_position, 1);
+		imageLayers.splice(layerImagePosition, 1);
 		console.log(imageLayers);
 
 		outputImageLayers();
@@ -136,9 +136,9 @@ $(function(){
 		
 		console.log(setOpacity);
 
-		var selectedImageLayer_id = $(this).attr("data-id");
+		var selectedImageLayerId = $(this).attr("data-id");
 		for(var i = 0; i < imageLayers.length; i++){
-			if( selectedImageLayer_id == imageLayers[i].id ){
+			if( selectedImageLayerId == imageLayers[i].id ){
 				imageLayers[i].opacity = setOpacity;
 				break;
 			}
@@ -148,13 +148,13 @@ $(function(){
 		showPreview();
 	};
 
-	$('#image_category').on('click', 'li', select);
+	$('#imageCategory').on('click', 'li', select);
 
-	$('#image_layers_list').on('click', '.deletelayer', removeLayer);
+	$('#imageLayersList').on('click', '.deletelayer', removeLayer);
 
-	$('#image_layers_list').on('keydown', '.imageopacity-field', changeOpacity);
+	$('#imageLayersList').on('keydown', '.imageopacity-field', changeOpacity);
 
-	$('#image_layers_list').dragsort({ 
+	$('#imageLayersList').dragsort({ 
 		dragSelector: ".movelayer"
 		, dragEnd: reorderImageLayersArray
 	});
