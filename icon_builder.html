@@ -30,9 +30,9 @@
 	  					<ul class="dropdown-menu" role="menu">
 	  					</ul>
 					</div>
-					<ul id="imageCategory" class=""></ul>
+					<ul id="imageCategory"></ul>
 				</div>
-				<div class="span4" style="text-align:center">
+				<div class="span4">
 					<h4>Preview</h4>
 					<div class="previewHolder"></div>	
 					<button class="btn btn-primary approve" type="button">Approve</button>	
@@ -49,18 +49,30 @@
   			<div>
   				<img class="imageLayerImage" src="{{url}}"></img>
   				<span class="imageLayerName">{{name}}</span>
-  				<button class="btn btn-mini movelayer" type="button"><i class="icon-move"></i></button>
+  				<a class="movelayer" type="button"><i class="icon-move"></i></a>
 				<button class="btn btn-danger btn-mini deletelayer" type="button" data-id="{{id}}" data-name="{{name}}" data-url="{{url}}"><i class="icon-trash"></i></button>
 			</div>
 			<div>
-				<label class="imageopacity span1">Opacity</label>
-				<input class="imageopacity-field span2" type="input" value="{{opacity}}" placeholder="0-1" data-id="{{id}}"></input>
+				<label class="imageOpacity span1">Opacity</label>
+				<input class="imageOpacityField span1" type="input" value="{{opacity}}" placeholder="0-1" data-id="{{id}}"></input>
+			</div>
+			<div>
+				<label class="imageSize span1">Size</label>
+				<input class="imageSizeField span1" type="number" max="288" min="0" value="{{size}}" data-id="{{id}}"></input>
+			</div>
+			<div>
+				<label class="imageTopPosition span1">From Top</label>
+				<input class="imageTopPositionField span1" type="number" max="288" min="0" value="{{top}}" data-id="{{id}}"></input>
+			</div>
+			<div>
+				<label class="imageLeftPosition span1">From Left</label>
+				<input class="imageLeftPositionField span1" type="number" max="288" min="0" value="{{left}}" data-id="{{id}}"></input>
 			</div>
 		</li>
 	</script>
 	<script id="iconPreviewTemplate" type="text/x-handlebars-template">
 		{{#each layers}}
-			<img src="{{this.url}}" data-id="{{this.id}}" style="opacity: {{this.opacity}}"></img>
+			<img src="{{this.url}}" data-id="{{this.id}}" style="opacity: {{this.opacity}}; width: {{this.size}}px; height: {{this.size}}px; top: {{top}}px; left: {{left}}px"></img>
 		{{/each}}
 		<img class="rounded_edges" src="images/effects/rounded_edges.png"></img>
 	</script>
