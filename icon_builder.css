@@ -7,14 +7,6 @@ h1, h4, .center {
 	outline-offset: -2px;
 }
 
-.blackborder {
-	border: 1px solid black;
-}
-
-.dropdown-menu {
-	margin-left: 72px;
-}
-
 .previewHolder{
 	position:relative;
 	overflow:hidden;
@@ -30,7 +22,7 @@ h1, h4, .center {
 }
 
 .approve {
-	margin-top: 200px;
+	margin: 20px 0 0 110px;
 }
 
 .rounded_edges {
@@ -40,7 +32,7 @@ h1, h4, .center {
 #imageCategory {
 	list-style-type: none;
 	margin-top: 10px;
-	height: 400px;
+	height: 540px;
 	overflow: scroll;
 }
 
@@ -57,7 +49,7 @@ h1, h4, .center {
 
 #imageLayersList {
 	margin-top: 10px;
-	height: 400px;
+	height: 600px;
 	overflow: scroll;
 }
 
@@ -123,8 +115,4 @@ input[type="number"] {
 	margin-top:5px;
 	float:right;
 	cursor: pointer;
-}
-
-.imageopacity {
-	position:inline;
 }

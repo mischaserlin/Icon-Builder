@@ -72,6 +72,7 @@ $(function(){
 	});
 
 	var showImagesForCategory = function(category){
+		selectedCategory = category
 		var categoryDisplayHTML = templateShowImagesForCategory({image: imageCategories[category]});
 		$('#imageCategory').html(categoryDisplayHTML);
 	}
@@ -79,14 +80,10 @@ $(function(){
 	showImagesForCategory($('.imageCategories select').val());
 
 	var outputImageLayers = function(e){
-		var imageLayerHTML = "";
 		for(var i = 0; i < imageLayers.length; i++){
 			imageLayers[i].position = i;
-			var html = templateLayers(imageLayers[i]);
-			imageLayerHTML += html;
 		}
-		console.log(imageLayerHTML);
-		console.log("check position", imageLayers);
+		var imageLayerHTML = templateLayers({ image: imageLayers })
 		$('#imageLayersList').html(imageLayerHTML);
 	};
 
