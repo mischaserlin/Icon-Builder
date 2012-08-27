@@ -15,14 +15,15 @@
 			<div class="row">
 				<div class="span12">
 					<h1>Build your hella cool icon!</h1>
-					<p>1. Select as many images form the right as you want.</p> 
-					<p>2. Change some image properties and rearrange the layers on the right.</p> 
-					<p>3. Preview and approve your icon in the middle.</p>
+					<p class="center">1. Select as many images form the right as you want.</p> 
+					<p class="center">2. Change some image properties and rearrange the layers on the right.</p> 
+					<p class="center">3. Preview and approve your icon in the middle.</p>
 				</div>
 			</div>	
 			<div class="row">
-				<div class="span4">
+				<div class="span4 imageCategories center">
 					<h4>Choose your images</h4>
+					<!--
 					<div class="dropdown center">
 	  					<a class="dropdown-toggle btn" id="dLabel" role="button" data-toggle="dropdown" data-target="#">Categories
 	  						<b class="caret"></b>
@@ -30,6 +31,8 @@
 	  					<ul class="dropdown-menu" role="menu">
 	  					</ul>
 					</div>
+					-->
+					<select></select>
 					<ul id="imageCategory"></ul>
 				</div>
 				<div class="span4">
@@ -39,34 +42,49 @@
 				</div>
 				<div class="span4">
 					<h4 style="margin-left:25px">Arrange Layers</h4>
-					<ol id="imageLayersList">
+					<ol id="imageLayersList" class="unstyled">
 					</ol>
 				</div>
 			</div>
 		</div>
+	<script id="dropdownImageCategories" type="text/x-handlebars-template">
+		{{#key_value categories}}
+			<option value="{{key}}">
+				{{key}}
+			</option> 
+		{{/key_value}}
+	</script>
+	<script id="showImagesForCategory" type="text/x-handlebars-template">
+		{{#each image}}
+			<li>
+				<img data-id="{{this.id}}" src="{{this.url}}"></img>
+			</li>
+		{{/each}}
+	</script>
 	<script id="imageLayerTemplate" type="text/x-handlebars-template">
-  		<li class="imageLayer" data-id="{{id}}" data-layer-position="{{position}}">
-  			<div>
-  				<img class="imageLayerImage" src="{{url}}"></img>
-  				<span class="imageLayerName">{{name}}</span>
+  		<li class="imageLayer row" data-id="{{id}}" data-layer-position="{{position}}">
+  			<div class="imageLayerLeftSide span1">
+  				<p>{{position}}.</p>
   				<a class="movelayer" type="button"><i class="icon-move"></i></a>
-				<button class="btn btn-danger btn-mini deletelayer" type="button" data-id="{{id}}" data-name="{{name}}" data-url="{{url}}"><i class="icon-trash"></i></button>
-			</div>
-			<div>
-				<label class="imageOpacity span1">Opacity</label>
-				<input class="imageOpacityField span1" type="input" value="{{opacity}}" placeholder="0-1" data-id="{{id}}"></input>
-			</div>
-			<div>
-				<label class="imageSize span1">Size</label>
-				<input class="imageSizeField span1" type="number" max="288" min="0" value="{{size}}" data-id="{{id}}"></input>
-			</div>
-			<div>
-				<label class="imageTopPosition span1">From Top</label>
-				<input class="imageTopPositionField span1" type="number" max="288" min="0" value="{{top}}" data-id="{{id}}"></input>
-			</div>
-			<div>
-				<label class="imageLeftPosition span1">From Left</label>
-				<input class="imageLeftPositionField span1" type="number" max="288" min="0" value="{{left}}" data-id="{{id}}"></input>
+  			</div>
+  			<div class="imageLayerRightSide span3" ref="tooltip">
+	  			<div class="row">
+	  				<img class="imageLayerImage" src="{{url}}"></img>
+	  				<span class="imageLayerName">{{name}}</span>
+					<a class="deletelayer" type="button" data-id="{{id}}" data-name="{{name}}" data-url="{{url}}"><i class="icon-trash"></i></a>
+				</div>
+				<div class="fieldLabels row">
+					<label class="imageOpacity field">Opacity</label>
+					<label class="imageSize field size">Size</label>
+					<label class="imageTopPosition field y">Y</label>
+					<label class="imageLeftPosition field x">X</label>
+				</div>
+				<div class="row">
+					<input class="imageOpacityField field" type="input" value="{{opacity}}" placeholder="0-1" data-id="{{id}}"></input>
+					<input class="imageSizeField field" type="number" max="288" min="0" value="{{size}}" data-id="{{id}}"></input>
+					<input class="imageTopPositionField field" type="number" max="288" min="0" value="{{top}}" data-id="{{id}}"></input>
+					<input class="imageLeftPositionField field" type="number" max="288" min="0" value="{{left}}" data-id="{{id}}"></input>
+				</div>
 			</div>
 		</li>
 	</script>

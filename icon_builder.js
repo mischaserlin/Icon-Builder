@@ -1,11 +1,53 @@
 $(function(){
+	Handlebars.registerHelper("key_value", function(obj, fn) {
+	    var buffer = "",
+	        key;
+
+	    for (key in obj) {
+	        if (obj.hasOwnProperty(key)) {
+	            buffer += fn({key: key, value: obj[key]});
+	        }
+	    }
+
+	    return new Handlebars.SafeString(buffer);
+	});
+
+	// function IconBuilder(){
+	// 	this.imageLayers = [];
+	// 	this.selectedCategory = [];
+	// 	this.imageCategories = { 
+	// 			backgrounds: [{id: 0, name: "Red", opacity: 1, size: 144, top: 0, left: 0, url: "images/backgrounds/red.png"}, {id: 1, name: "Orange", opacity: 1, size: 144, top: 0, left: 0, url: "images/backgrounds/orange.png"}, {id: 2, name: "Yellow", opacity: 1, opacity: 1, size: 144, top: 0, left: 0, url: "images/backgrounds/yellow.png"}, {id:3, name:"Green", opacity: 1, opacity: 1, size: 144, top: 0, left: 0, url: "images/backgrounds/green.png"}, {id: 4, name: "Blue", opacity: 1, size: 144, top: 0, left: 0, url: "images/backgrounds/blue.png"}, {id: 5, name: "Magenta", opacity: 1, size: 144, top: 0, left: 0, url: "images/backgrounds/magenta.png"}, {id: 6, name: "Violet", opacity: 1, size: 144, top: 0, left: 0, url: "images/backgrounds/violet.png"}, {id: 7, name: "White", opacity: 1, size: 144, top: 0, left: 0, url: "images/backgrounds/white.png"}, {id: 8, name: "Grey", opacity: 1, size: 144, top: 0, left: 0, url: "images/backgrounds/grey.png"}, {id: 9, name: "Black", opacity: 1, size: 144, top: 0, left: 0, url: "images/backgrounds/black.png"}]
+	// 			, icons: [{id: 10, name: "Chart", opacity: 1, size: 144, top: 0, left: 0, url: "images/icons/chart.png"}, {id: 11, name: "Chatbox", opacity: 1, size: 144, top: 0, left: 0, url: "images/icons/chatbox.png"}, {id: 12, name: "Check", opacity: 1, size: 144, top: 0, left: 0, url: "images/icons/check.png"}, {id: 13, name: "Cloud", opacity: 1, size: 144, top: 0, left: 0, url: "images/icons/cloud.png"}, {id: 14, name: "Eye", opacity: 1, size: 144, top: 0, left: 0, url: "images/icons/eye.png"}, {id: 15, name: "Music", opacity: 1, size: 144, top: 0, left: 0, url: "images/icons/music.png"}, {id: 16, name: "Plane", opacity: 1, size: 144, top: 0, left: 0, url: "images/icons/plane.png"}, {id: 17, name: "Play", opacity: 1, size: 144, top: 0, left: 0, url: "images/icons/play.png"}, {id: 18, name: "Scissors", opacity: 1, size: 144, top: 0, left: 0, url: "images/icons/scissors.png"}]
+	// 			,effects: [{id: 20, name: "Highlight", opacity: 1, size: 144, top: 0, left: 0, url: "images/effects/lighting.png"}]
+	// 		};
+	// 	this.sourceLayers = $("#imageLayerTemplate").html();
+	// 	this.templateLayers = Handlebars.compile(sourceLayers);
+	// 	this.sourcePreview = $("#iconPreviewTemplate").html();
+	// 	this.templatePreview = Handlebars.compile(sourcePreview);
+	// 	this.sourceDropDownCategories = $('#dropdownImageCategory').html();
+	// 	this.templateDropDownCategories = Handlebars.compile(sourceDropDownCategories);
+
+	// }
+
+	// IconBuilder.prototype.init = function(){
+	// 	this.imageLayers
+	// };
+
+	// IconBuilder.prototype.showImagesForCategory = function(category){
+
+	// };
+
+	// var myIconBuilder = new IconBuilder();
+	// myIconBuilder.init();
+
+//---------------------------
 	var imageLayers	= []
 		, selectedCategory;
 
 	var imageCategories = {
 		backgrounds: [{id: 0, name: "Red", opacity: 1, size: 144, top: 0, left: 0, url: "images/backgrounds/red.png"}, {id: 1, name: "Orange", opacity: 1, size: 144, top: 0, left: 0, url: "images/backgrounds/orange.png"}, {id: 2, name: "Yellow", opacity: 1, opacity: 1, size: 144, top: 0, left: 0, url: "images/backgrounds/yellow.png"}, {id:3, name:"Green", opacity: 1, opacity: 1, size: 144, top: 0, left: 0, url: "images/backgrounds/green.png"}, {id: 4, name: "Blue", opacity: 1, size: 144, top: 0, left: 0, url: "images/backgrounds/blue.png"}, {id: 5, name: "Magenta", opacity: 1, size: 144, top: 0, left: 0, url: "images/backgrounds/magenta.png"}, {id: 6, name: "Violet", opacity: 1, size: 144, top: 0, left: 0, url: "images/backgrounds/violet.png"}, {id: 7, name: "White", opacity: 1, size: 144, top: 0, left: 0, url: "images/backgrounds/white.png"}, {id: 8, name: "Grey", opacity: 1, size: 144, top: 0, left: 0, url: "images/backgrounds/grey.png"}, {id: 9, name: "Black", opacity: 1, size: 144, top: 0, left: 0, url: "images/backgrounds/black.png"}]
 		, icons: [{id: 10, name: "Chart", opacity: 1, size: 144, top: 0, left: 0, url: "images/icons/chart.png"}, {id: 11, name: "Chatbox", opacity: 1, size: 144, top: 0, left: 0, url: "images/icons/chatbox.png"}, {id: 12, name: "Check", opacity: 1, size: 144, top: 0, left: 0, url: "images/icons/check.png"}, {id: 13, name: "Cloud", opacity: 1, size: 144, top: 0, left: 0, url: "images/icons/cloud.png"}, {id: 14, name: "Eye", opacity: 1, size: 144, top: 0, left: 0, url: "images/icons/eye.png"}, {id: 15, name: "Music", opacity: 1, size: 144, top: 0, left: 0, url: "images/icons/music.png"}, {id: 16, name: "Plane", opacity: 1, size: 144, top: 0, left: 0, url: "images/icons/plane.png"}, {id: 17, name: "Play", opacity: 1, size: 144, top: 0, left: 0, url: "images/icons/play.png"}, {id: 18, name: "Scissors", opacity: 1, size: 144, top: 0, left: 0, url: "images/icons/scissors.png"}]
-		, effects: [{id: 20, name: "Highlight", opacity: 1, size: 144, top: 0, left: 0, url: "images/effects/lighting.png"}, {id: 21, name: "Round Edges", opacity: 1, size: 144, top: 0, left: 0, url: "images/effects/rounded_edges.png"}]
+		, effects: [{id: 20, name: "Highlight", opacity: 1, size: 144, top: 0, left: 0, url: "images/effects/lighting.png"}]
 	};
 
 	var sourceLayers = $("#imageLayerTemplate").html();
@@ -14,25 +56,27 @@ $(function(){
 	var sourcePreview = $("#iconPreviewTemplate").html();
 	var templatePreview = Handlebars.compile(sourcePreview);
 
-	$('.dropdown').on('click', 'a', function(){
-		var imageCategoryHTML = "";
-		for(var key in imageCategories){
-			imageCategoryHTML += '<li><a class="center" href="#">' + key + '</a></li>';
-		}
-		console.log(imageCategoryHTML);
-		$('.dropdown-menu').html(imageCategoryHTML);
+	var sourceDropDownCategories = $('#dropdownImageCategories').html();
+	var templateDropDownCategories = Handlebars.compile(sourceDropDownCategories);
+
+	var sourceShowImagesForCategory = $('#showImagesForCategory').html();
+	var templateShowImagesForCategory = Handlebars.compile(sourceShowImagesForCategory);
+
+
+	
+	$('.imageCategories select').html(templateDropDownCategories({categories: imageCategories}));
+
+
+	$('.imageCategories').on('change', 'select', function(){
+		showImagesForCategory($(this).val());
 	});
 
-	$('.dropdown-menu').on('click', 'a', function(){
-		var categoryPicked = selectedCategory = $(this).html();
-		console.log(categoryPicked);
-		var categoryDisplayHTML = "";
-		for(var i = 0; i < imageCategories[categoryPicked].length; i++){
-			categoryDisplayHTML += '<li class="' + categoryPicked + '"><img data-id="' + imageCategories[categoryPicked][i].id + '" data-category="' + selectedCategory + '" src="' + imageCategories[categoryPicked][i].url + '"></img></li> ';
-		}
-		console.log(categoryDisplayHTML);
+	var showImagesForCategory = function(category){
+		var categoryDisplayHTML = templateShowImagesForCategory({image: imageCategories[category]});
 		$('#imageCategory').html(categoryDisplayHTML);
-	});
+	}
+
+	showImagesForCategory($('.imageCategories select').val());
 
 	var outputImageLayers = function(e){
 		var imageLayerHTML = "";
@@ -47,28 +91,19 @@ $(function(){
 	};
 
 	var reorderImageLayersArray = function(){
-		console.log('BILBO', this);
 		var removedLayerObject;
-
 		for(var i = 0; i < imageLayers.length; i++){
-			console.log('WILL IT BLEND?', $(this).attr("data-layer-position"), imageLayers[i].position);
 			if($(this).attr("data-layer-position") == imageLayers[i].position){
-				console.log("ITEMSSDFS", imageLayers[i]);
 				removedLayerObject = imageLayers[i];
 				imageLayers.splice(i,1);
 				break;
 			}
 		}
-		console.log("CHECKITEM", removedLayerObject);
-		console.log(imageLayers);
-
 		$("#imageLayersList li").each(function(index, element){
 			if( $(element).attr("data-layer-position") == removedLayerObject.position){
 				imageLayers.splice(index, 0, removedLayerObject);
 			}
 		});
-
-
 		outputImageLayers();
 		showPreview();
 	};
@@ -88,19 +123,17 @@ $(function(){
 				break;
 			}
 		}
-		// imageSelected = {id: imageSelected_id, name: imageSelected_name, opacity: 1, size: 144, top: 0, left: 0, url: imageSelected_url}
-
 		$('#imageCategory li').removeClass('highlight');
 		$(this).addClass("highlight");
-
 		imageLayers.push({
 			id: imageSelected.id
 			, opacity: imageSelected.opacity
 			, name: imageSelected.name
-			, size: 144, top: 0, left: 0, url: imageSelected.url
+			, size: 144
+			, top: 0
+			, left: 0
+			, url: imageSelected.url
 		});
-		console.log(imageLayers);
-
 		outputImageLayers();
 		showPreview();
 	};
@@ -114,114 +147,77 @@ $(function(){
 				break;
 			}
 		}
-		console.log(layerImagePosition);
-
 		imageLayers.splice(layerImagePosition, 1);
-		console.log(imageLayers);
-
 		outputImageLayers();
 		showPreview();
 	};
 
+	var findAsset = function(input){
+		var selectedImageLayerId = input.attr("data-id");
+		for( var i = 0; i < imageLayers.length; i++ ){
+			if( selectedImageLayerId == imageLayers[i].id ){
+				selectedImageLayersObjectPosition = i;
+				return imageLayers[i];
+			} 
+		}
+	};
+
+	var propertyChangeCheck = function(input){
+		if( Number(input.val()) == NaN){
+			alert("Please enter a valid number.")
+			return false;
+		}
+		return true;
+	};
+
+	var changeOpacityEnter = function(input){
+		if( input.val() < 0 || input.val() >  1 ){
+			alert("Please enter a valid number between 0 and 1.")
+			return false;
+		}
+		return true;
+	};
+
 	var changeOpacity = function(event){
-		var setOpactiy;
-		if(event.which != 13){
-			return;
-		}
-		else if( $(this).val() < 0 || $(this).val() > 1) {
-			alert("The opacity must be between 0 and 1");
-			return;
-		}
-		setOpacity = $(this).val();
-		
-		console.log(setOpacity);
-
-		var selectedImageLayerId = $(this).attr("data-id");
-		for(var i = 0; i < imageLayers.length; i++){
-			if( selectedImageLayerId == imageLayers[i].id ){
-				imageLayers[i].opacity = setOpacity;
-				break;
+		if(propertyChangeCheck($(this))){
+			var newOpacity = $(this).val();
+			if(newOpacity < 0 || newOpacity > 1){
+				alert('Opacity is a number between 0 and 1.')
+				$(this).val(1);
+			}else{
+				findAsset($(this)).opacity = newOpacity;
+				showPreview();
 			}
 		}
-		// $('.imageOpacityField').val(setOpacity);
-
-		showPreview();
 	};
 
-	var changeSize = function(e){
-		var setSize;
-		
-		if(Number($(this).val()) == NaN){
-			alert("Please enter a valid number.")
-			return;
+	var changeSize = function(){
+		if(propertyChangeCheck($(this))){
+			findAsset($(this)).size = $(this).val();
+			showPreview();
 		}
-			
-		setSize = $(this).val();
-
-		console.log(setSize);
-
-		var selectedImageLayerId = $(this).attr("data-id");
-		for(var i = 0; i < imageLayers.length; i++){
-			if( selectedImageLayerId == imageLayers[i].id ){
-				imageLayers[i].size = setSize;
-				break;
-			}
-		}
-
-		showPreview();
 	};
 
-	var changeTopPosition = function(e){
-		var setTopPosition;
-		
-		if(Number($(this).val()) == NaN){
-			alert("Please enter a valid number.")
-			return;
+	var changeTopPosition = function(){
+		if(propertyChangeCheck($(this))){
+			findAsset($(this)).top = $(this).val();
+			showPreview();
 		}
-			
-		setTopPosition = $(this).val();
-
-		console.log(setTopPosition);
-
-		var selectedImageLayerId = $(this).attr("data-id");
-		for(var i = 0; i < imageLayers.length; i++){
-			if( selectedImageLayerId == imageLayers[i].id ){
-				imageLayers[i].top = setTopPosition;
-				break;
-			}
-		}
-
-		showPreview();
 	};
 
-	var changeLeftPostion = function(e){
-		var setLeftPosition;
-		
-		if(Number($(this).val()) == NaN){
-			alert("Please enter a valid number.")
-			return;
+	var changeLeftPostion = function(){
+		if(propertyChangeCheck($(this))){
+			findAsset($(this)).left = $(this).val();
+			showPreview();
 		}
-			
-		setLeftPosition = $(this).val();
-
-		console.log(setLeftPosition);
-
-		var selectedImageLayerId = $(this).attr("data-id");
-		for(var i = 0; i < imageLayers.length; i++){
-			if( selectedImageLayerId == imageLayers[i].id ){
-				imageLayers[i].left = setLeftPosition;
-				break;
-			}
-		}
-
-		showPreview();
 	};
+
 
 	$('#imageCategory').on('click', 'li', select);
 
 	$('#imageLayersList').on('click', '.deletelayer', removeLayer);
 
-	$('#imageLayersList').on('keydown', '.imageOpacityField', changeOpacity);
+	$('#imageLayersList').on('keyup', '.imageOpacityField', changeOpacity);
 
 	$('#imageLayersList').on('keyup', '.imageSizeField', changeSize);
 	//later add ability to change width and height seperately with an option to link 
@@ -232,7 +228,7 @@ $(function(){
 	$('#imageLayersList').on('keyup', '.imageLeftPositionField', changeLeftPostion);
 
 	$('#imageLayersList').dragsort({ 
-		dragSelector: ".movelayer"
+		dragSelector: ".imageLayerLeftSide"
 		, dragEnd: reorderImageLayersArray
 	});
 

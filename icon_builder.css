@@ -1,4 +1,4 @@
-h1, h4, p, .center {
+h1, h4, .center {
 	text-align:center;
 }
 .highlight {
@@ -38,10 +38,10 @@ h1, h4, p, .center {
 }
 
 #imageCategory {
-	list-style-type:none;
+	list-style-type: none;
 	margin-top: 10px;
 	height: 400px;
-	overflow:scroll;
+	overflow: scroll;
 }
 
 #imageCategory li {
@@ -55,25 +55,74 @@ h1, h4, p, .center {
 	background-color: #e0e0e0
 }
 
+#imageLayersList {
+	margin-top: 10px;
+	height: 400px;
+	overflow: scroll;
+}
+
 .imageLayer {
-	padding-bottom:5px;
+	margin-bottom:15px;
 	margin-top:5px;
-	border: 1px solid #e0e0e0;
+	padding-bottom:5px;
+	border-bottom: 2px solid #BBBBBB;
+}
+
+.imageLayerLeftSide {
+	text-align: right;
+	margin-left: -10px;
+	padding-right: 10px;
+	cursor: pointer;
+}
+
+.imageLayerRightSide {
+	float: right;
+	border-left: 1px solid #E0E0E0;
+	margin-left: 0px;
+	padding-left: 30px;
 }
 
 .imageLayerImage {
 	padding:2px;
 	height:44px;
 	width:44px;
+	background-color: #e0e0e0
+}
+
+.fieldLabels {
+	padding-top:10px;
+}
+
+.field {
+	width: 45px;
+	display: inline;
+}
+
+.size {
+	margin-left: 15px;
+}
+
+.y {
+	margin-left: 40px;
+}
+
+.x {
+	margin-left: 50px;
+}
+
+input[type="number"] {
+	margin-bottom: 0px;
 }
 
 .movelayer {
 	margin-left:10px;
 }
 
-.deletelayer, .movelayer {
+.deletelayer {
+	width:25px;
 	margin-top:5px;
 	float:right;
+	cursor: pointer;
 }
 
 .imageopacity {
