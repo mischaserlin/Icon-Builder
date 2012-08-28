@@ -2,13 +2,8 @@
 <html>
 	<head>
 			<title> App Icon Builder </title>
-			<script src="jquery-1.7.2.js" type="text/javascript"></script>
 			<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
-			<script src="bootstrap/js/bootstrap.min.js"></script>
-			<link rel="stylesheet" type="text/css" href="icon_builder.css"/>
-			<script src="handlebars.js" type="text/javascript"></script>
-			<script src="dragsort-0.5.1/jquery.dragsort-0.5.1.js" type="text/javascript"></script>
-			<script src="icon_builder.js" type="text/javascript"></script>
+			<link rel="stylesheet" type="text/css" href="style/icon_builder.css"/>
 	</head>
 	<body>
 		<div id="iconBuilder" class="container">
@@ -63,7 +58,7 @@
 		  			<div class="row">
 		  				<img class="imageLayerImage" src="{{this.url}}"></img>
 		  				<span class="imageLayerName">{{this.name}}</span>
-						<a class="deletelayer" type="button" data-id="{{this.id}}" data-name="{{this.name}}" data-url="{{this.url}}"><i class="icon-trash"></i></a>
+						<a class="deletelayer" type="button" data-position="{{this.position}}" data-name="{{this.name}}" data-url="{{this.url}}"><i class="icon-trash"></i></a>
 					</div>
 					<div class="fieldLabels row">
 						<label class="imageOpacity field">Opacity</label>
@@ -87,5 +82,10 @@
 		{{/each}}
 		<img class="rounded_edges" src="images/effects/rounded_edges.png"></img>
 	</script>
+	<script src="javascript/jquery-1.7.2.js" type="text/javascript"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="javascript/handlebars.js" type="text/javascript"></script>
+	<script src="javascript/jquery.dragsort-0.5.1.js" type="text/javascript"></script>
+	<script src="javascript/icon_builder.js" type="text/javascript"></script>
 	</body>
 </html>
